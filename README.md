@@ -46,7 +46,7 @@ e não acessa a internet.
 ## Instalação
 
 ```bash
-git clone <seu-repo> && cd cv-tailor
+git clone https://github.com/LuizClaudioAds/cv-tailor.git && cd cv-tailor
 npm install
 
 # PDF via Chromium: usa Edge/Chrome instalado ou o cache do Playwright
