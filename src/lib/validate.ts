@@ -171,19 +171,27 @@ export function validateCv(
       .filter(Boolean),
   ];
 
+  const isLearningGroup = (group: string) => /aprend|learning/i.test(group);
+
   const allowedSkills = new Set(
     [
-      ...profile.skills.flatMap((group) => group.items),
+      ...profile.skills
+        .filter((group) => !isLearningGroup(group.group))
+        .flatMap((group) => group.items),
       ...profile.projects.flatMap((project) => project.stack),
       ...profile.certifications.map((cert) => cert.name),
     ].flatMap((value) => expandSkill(value).map(canonicalSkill)),
   );
   const learning = new Set(
-    bank
-      ? bank.aprendendo.flatMap((keyword) => expandSkill(keyword.term).map(canonicalSkill))
-      : [],
+    [
+      ...(bank
+        ? bank.aprendendo.flatMap((keyword) => expandSkill(keyword.term))
+        : []),
+      ...profile.skills
+        .filter((group) => isLearningGroup(group.group))
+        .flatMap((group) => expandSkill(group.items.join(', '))),
+    ].map(canonicalSkill),
   );
-  const isLearningGroup = (group: string) => /aprend|learning/i.test(group);
 
   const checkSkill = (item: string, where: string) => {
     if (expandSkill(item).some((candidate) => allowedSkills.has(canonicalSkill(candidate)))) return;

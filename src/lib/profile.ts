@@ -20,6 +20,19 @@ export const bulletSchema = z.object({
   text: z.string().min(10),
 });
 
+const balanced = (value: string) =>
+  (value.match(/\(/g)?.length ?? 0) === (value.match(/\)/g)?.length ?? 0);
+
+/**
+ * Item de skill com parenteses desbalanceados normalmente significa YAML quebrado:
+ * em listas inline (`[a, b]`), uma virgula dentro de parenteses divide o item em dois.
+ */
+const balancedItem = z.string().refine(balanced, {
+  message:
+    'parenteses desbalanceados — em listas inline ([a, b]) use aspas quando houver virgula ' +
+    'dentro de parenteses, ex.: "Testes automatizados (Vitest, Playwright)"',
+});
+
 export const profileSchema = z.object({
   identity: z.object({
     name: z.string().min(3),
@@ -44,7 +57,7 @@ export const profileSchema = z.object({
       z.object({
         group: z.string(),
         group_en: z.string().optional(),
-        items: z.array(z.string()).min(1),
+        items: z.array(balancedItem).min(1),
       }),
     )
     .min(1),

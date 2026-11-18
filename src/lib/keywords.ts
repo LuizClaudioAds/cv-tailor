@@ -24,10 +24,13 @@ export type KeywordBank = z.infer<typeof bankSchema>;
 export const TIERS = ['core', 'fortes', 'aprendendo', 'pendente', 'soft'] as const;
 export type Tier = (typeof TIERS)[number];
 
-export async function loadKeywords(): Promise<KeywordBank> {
-  const file = path.join(paths.data, 'keywords.yaml');
-  const raw = await fs.readFile(file, 'utf8').catch(() => {
-    throw new Error('data/keywords.yaml nao encontrado.');
+export async function loadKeywords(
+  filePath: string = path.join(paths.data, 'keywords.yaml'),
+): Promise<KeywordBank> {
+  const raw = await fs.readFile(filePath, 'utf8').catch(() => {
+    throw new Error(
+      `${filePath.replace(/\\/g, '/')} nao encontrado. Copie data/keywords.example.yaml para data/keywords.yaml.`,
+    );
   });
   const { default: YAML } = await import('yaml');
   const parsed = bankSchema.safeParse(YAML.parse(raw));

@@ -1,0 +1,106 @@
+# Currículo de exemplo — usado apenas para gerar docs/preview.png.
+# Dados fictícios (Maria Souza), alinhados a data/profile.example.yaml.
+meta:
+  company: Acme Tecnologia
+  role: Desenvolvedora Front-end Júnior
+  lang: pt
+  headline: Desenvolvedora Front-end Júnior
+  match_score: 84
+
+summary: |
+  Desenvolvedora Front-end Júnior com experiência real em produção: interfaces em React, Next.js,
+  TypeScript e Tailwind CSS, consumo de APIs REST e testes automatizados. Reduzi de ~2 horas para
+  ~40 minutos uma rotina operacional diária (~65% menos tempo), com CI no GitHub Actions e deploy
+  contínuo na Vercel. Pratico melhoria contínua e cursando ADS (previsão Dez/2027).
+
+skills:
+  - group: Linguagens
+    items: [JavaScript, TypeScript, SQL]
+  - group: Frontend
+    items: [React, Next.js, HTML, CSS, Tailwind CSS]
+  - group: Backend
+    items: [Node.js, APIs REST]
+  - group: Qualidade e DevOps
+    items:
+      - "Testes automatizados (Vitest, Playwright)"
+      - "CI/CD (GitHub Actions)"
+      - Git, GitHub
+  - group: Em aprendizado
+    items: [Docker, "Cloud (AWS)"]
+
+projects:
+  - ref: painel-interno
+    name: Painel Interno de Relatórios
+    stack: [Next.js, TypeScript, React, Tailwind CSS, Vitest, GitHub Actions, Vercel]
+    link: https://github.com/exemplo/painel-interno
+    bullets:
+      - ref: proj-1
+        text: >-
+          Desenvolvi uma aplicação web em Next.js, TypeScript e Tailwind para padronizar relatórios
+          internos, com regras configuráveis e exportação em HTML.
+      - ref: proj-2
+        text: >-
+          Implantei testes automatizados com Vitest, lint e typecheck no CI do GitHub Actions, com
+          deploy contínuo na Vercel.
+      - ref: proj-3
+        text: >-
+          Reduzi de ~2 horas para ~40 minutos a rotina diária de digitação de relatórios (~65% menos tempo).
+
+  - ref: landing-pages
+    name: Landing Pages e Sites Institucionais
+    stack: [React, Next.js, Tailwind CSS]
+    bullets:
+      - ref: lp-1
+        text: >-
+          Desenvolvi landing pages e sites institucionais com React e Next.js, priorizando SEO,
+          desempenho, responsividade e boas práticas de UX.
+
+experience:
+  - ref: acme
+    role: Analista Operacional
+    company: Acme Tecnologia
+    context: rotina operacional + automação de processos
+    period: "2022 – Presente"
+    bullets:
+      - ref: exp-3
+        text: >-
+          Reduzi de ~2 horas para ~40 minutos uma rotina diária, com menos erros de digitação e menos
+          retrabalho (~65% menos tempo).
+      - ref: exp-2
+        text: >-
+          Desenvolvi automações com JavaScript, React e Node.js para eliminar tarefas manuais
+          repetitivas do fluxo de relatórios.
+      - ref: exp-4
+        text: >-
+          Identifiquei oportunidades de melhoria contínua nos processos e implementei soluções com
+          foco em usabilidade para os demais analistas.
+
+  - ref: freelance
+    role: Desenvolvedora Web
+    company: Autônomo
+    period: "2021 – Presente"
+    bullets:
+      - ref: free-2
+        text: >-
+          Implementei interfaces responsivas com foco em usabilidade, desempenho e boas práticas de
+          desenvolvimento web.
+      - ref: free-3
+        text: Desenvolvimento e integração de aplicações web com consumo de APIs REST.
+
+education:
+  - ref: ads-faculdade
+    course: Tecnólogo em Análise e Desenvolvimento de Sistemas (ADS)
+    institution: Faculdade Exemplo
+    detail: cursando — previsão Dez/2027
+
+certifications:
+  - ref: cert-react
+    name: React + Node.js
+    detail: Escola Exemplo · 60h
+  - ref: cert-git
+    name: Git e GitHub
+    detail: Escola Exemplo · 20h
+
+languages:
+  - Português (Nativo)
+  - Inglês (Intermediário — leitura técnica)

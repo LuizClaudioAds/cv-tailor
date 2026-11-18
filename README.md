@@ -5,6 +5,7 @@
 
 [![Node](https://img.shields.io/badge/node-%3E%3D22-brightgreen)](https://nodejs.org)
 [![TypeScript](https://img.shields.io/badge/TypeScript-strict-blue)](https://www.typescriptlang.org)
+[![CI](https://github.com/LuizClaudioAds/cv-tailor/actions/workflows/ci.yml/badge.svg)](https://github.com/LuizClaudioAds/cv-tailor/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-black)](#licença)
 
 `cv-tailor` é uma CLI que pega um currículo base estruturado, uma descrição de vaga e produz:
@@ -13,6 +14,10 @@ relatório de gaps. A IA escreve; o código confere.
 
 **EN:** A CLI that tailors a structured base résumé to each job posting, exporting an ATS-friendly
 PDF/DOCX plus a match analysis — with a validator that blocks fabricated experience, numbers or skills.
+
+![Exemplo de currículo gerado](docs/preview.png)
+
+*Currículo de exemplo gerado a partir de dados fictícios (`data/profile.example.yaml`).*
 
 ---
 
@@ -201,6 +206,22 @@ O CV é **reprovado** (e o agente recebe o relatório para corrigir) quando:
 npm run cv -- fix <slug>   # devolve o relatório ao agente e re-renderiza
 ```
 
+## Testes
+
+```bash
+npm test
+```
+
+Cobrem o núcleo do projeto:
+
+- **validador anti-alucinação** — número inventado, empresa trocada, período errado, skill fora do perfil,
+  tecnologia "em aprendizado" usada como domínio, bullet de outro projeto, link não cadastrado,
+  placeholder, projeto/certificação inexistente, CV em inglês com texto em português;
+- **motor de keywords** — `Java` não casa dentro de `JavaScript`, aliases e acentos, limite de palavra,
+  cálculo de cobertura.
+
+O CI roda typecheck, testes, build e valida o perfil de exemplo a cada push.
+
 ## Configuração
 
 | Arquivo | Papel |
@@ -231,9 +252,9 @@ model: anthropic/claude-sonnet-5-5#high
 
 - [ ] `tailor --inbox`: processar uma pasta `vagas/` em lote
 - [ ] `cover-letter.md` como padrão (hoje é `--cover`)
-- [ ] Testes unitários do validador + CI
 - [ ] Suporte a currículo em inglês com `profile.en.yaml`
 - [ ] Integração com Gupy/LinkedIn (aplicação assistida)
+- [ ] Testes de render (PDF/DOCX) com fixtures
 
 ## Privacidade
 

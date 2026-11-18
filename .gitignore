@@ -20,6 +20,7 @@ jobs/*/
 # Saidas locais
 *.tsbuildinfo
 preview.png
+!docs/preview.png
 .DS_Store
 Thumbs.db
 data/keywords.yaml

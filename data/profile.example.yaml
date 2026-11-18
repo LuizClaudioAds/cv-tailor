@@ -56,7 +56,12 @@ skills:
     items: [PostgreSQL]
   - group: Qualidade e DevOps
     group_en: Quality and DevOps
-    items: [Testes automatizados (Vitest, Playwright), CI/CD (GitHub Actions), Git, GitHub, Vercel]
+    items:
+      - "Testes automatizados (Vitest, Playwright)"
+      - "CI/CD (GitHub Actions)"
+      - Git
+      - GitHub
+      - Vercel
   - group: Em aprendizado
     group_en: Currently learning
     items: [Docker, Cloud (AWS)]
