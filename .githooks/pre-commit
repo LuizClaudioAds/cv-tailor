@@ -1,0 +1,19 @@
+#!/bin/sh
+# Bloqueia commit de dados pessoais e arquivos gerados.
+# Instalado por `npm run hooks:install` (ou automaticamente via `npm install`).
+
+set -e
+
+blocked=$(git diff --cached --name-only --diff-filter=ACMR | grep -E \
+  '^(data/(profile|preferences|keywords)\.yaml|data/base/|jobs/|vagas/)|(^|/)\.env($|\.)|\.(pdf|docx)$' \
+  || true)
+
+if [ -n "$blocked" ]; then
+  echo "" >&2
+  echo "Commit bloqueado: estes arquivos nao devem ser versionados." >&2
+  echo "$blocked" | sed 's/^/  - /' >&2
+  echo "" >&2
+  echo "Remova do stage com:  git restore --staged <arquivo>" >&2
+  echo "Se for intencional (nao deveria), use: git commit --no-verify" >&2
+  exit 1
+fi

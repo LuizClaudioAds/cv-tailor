@@ -66,6 +66,7 @@ export async function fetchJobFromUrl(url: string): Promise<JobSource> {
       `Nao consegui acessar ${url}: ${error instanceof Error ? error.message : String(error)}\n` +
         'LinkedIn e alguns portais bloqueiam leitura automatica. Copie o texto da vaga e salve em um ' +
         'arquivo .md/.txt, depois rode: cvtailor tailor <arquivo>.',
+      { cause: error },
     );
   }
 
@@ -101,13 +102,11 @@ export async function readJobSource(input: string): Promise<JobSource> {
   if (isUrl(input)) return fetchJobFromUrl(input);
 
   const file = path.resolve(process.cwd(), input);
-  const text = await fs
-    .readFile(file, 'utf8')
-    .catch(() => {
-      throw new Error(
-        `Nao encontrei "${input}". Passe uma URL, um arquivo .md/.txt ou "-" para ler da entrada padrao.`,
-      );
-    });
+  const text = await fs.readFile(file, 'utf8').catch(() => {
+    throw new Error(
+      `Nao encontrei "${input}". Passe uma URL, um arquivo .md/.txt ou "-" para ler da entrada padrao.`,
+    );
+  });
 
   if (text.trim().length < 80) {
     throw new Error('O arquivo da vaga parece vazio ou curto demais.');

@@ -11,7 +11,8 @@ export async function listJobs(): Promise<void> {
     return;
   }
 
-  const rows: Array<{ slug: string; company: string; role: string; score: string; files: string }> = [];
+  const rows: Array<{ slug: string; company: string; role: string; score: string; files: string }> =
+    [];
   for (const dir of dirs) {
     const jobDir = paths.jobDir(dir.name);
     const { default: YAML } = await import('yaml');
@@ -39,7 +40,9 @@ export async function listJobs(): Promise<void> {
   const width = Math.max(...rows.map((row) => row.slug.length), 4);
   console.log(`${'SLUG'.padEnd(width)}  MATCH  EMPRESA / CARGO`);
   for (const row of rows) {
-    console.log(`${row.slug.padEnd(width)}  ${row.score.padStart(5)}  ${row.company} — ${row.role}`);
+    console.log(
+      `${row.slug.padEnd(width)}  ${row.score.padStart(5)}  ${row.company} — ${row.role}`,
+    );
   }
   console.log('');
   console.log('Detalhes: cvtailor export <slug>  |  abra jobs/<slug>/analysis.md');

@@ -36,8 +36,8 @@ tone: >
   Sem clichês, sem emojis.
 
 avoid:
-  - "apaixonado por tecnologia"
-  - "proativo e dinâmico"
+  - 'apaixonado por tecnologia'
+  - 'proativo e dinâmico'
   - '"trabalho em equipe" como bullet isolado'
   - emojis
   - foto

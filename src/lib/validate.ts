@@ -1,6 +1,6 @@
 import type { TailoredCv } from './cv-schema.js';
 import { analyzeCoverage, type Coverage, type KeywordBank } from './keywords.js';
-import { indexProfile, type Profile } from './profile.js';
+import type { Profile } from './profile.js';
 import { normalize } from './text.js';
 
 export interface Report {
@@ -67,7 +67,6 @@ export function validateCv(
 ): Report {
   const errors: string[] = [];
   const warnings: string[] = [];
-  const index = indexProfile(profile);
   const allowed = allowedNumbers(profile);
 
   const allText = [
@@ -184,9 +183,7 @@ export function validateCv(
   );
   const learning = new Set(
     [
-      ...(bank
-        ? bank.aprendendo.flatMap((keyword) => expandSkill(keyword.term))
-        : []),
+      ...(bank ? bank.aprendendo.flatMap((keyword) => expandSkill(keyword.term)) : []),
       ...profile.skills
         .filter((group) => isLearningGroup(group.group))
         .flatMap((group) => expandSkill(group.items.join(', '))),
@@ -195,7 +192,10 @@ export function validateCv(
 
   const checkSkill = (item: string, where: string) => {
     if (expandSkill(item).some((candidate) => allowedSkills.has(canonicalSkill(candidate)))) return;
-    if (expandSkill(item).some((candidate) => learning.has(canonicalSkill(candidate))) && isLearningGroup(where)) {
+    if (
+      expandSkill(item).some((candidate) => learning.has(canonicalSkill(candidate))) &&
+      isLearningGroup(where)
+    ) {
       return;
     }
     errors.push(`Skill "${item}" nao existe no curriculo base (${where}).`);
@@ -224,17 +224,22 @@ export function validateCv(
 
   // 6. Idioma
   if (cv.meta.lang === 'en') {
-    const ptHits = allText.match(/\b(não|você|também|está|experiência|desenvolvimento|trabalho)\b/gi);
+    const ptHits = allText.match(
+      /\b(não|você|também|está|experiência|desenvolvimento|trabalho)\b/gi,
+    );
     if (ptHits && ptHits.length > 1) {
       errors.push('CV marcado como en, mas ha trechos em portugues.');
     }
   }
 
   // 7. Volume
-  if (cv.summary.length > 900) warnings.push('Resumo longo (>900 caracteres); pode passar de 1 pagina.');
+  if (cv.summary.length > 900)
+    warnings.push('Resumo longo (>900 caracteres); pode passar de 1 pagina.');
   const experienceBullets = cv.experience.reduce((sum, item) => sum + item.bullets.length, 0);
-  if (experienceBullets > 12) warnings.push(`${experienceBullets} bullets de experiencia; ideal <= 12.`);
-  if (cv.projects.length > 3) warnings.push(`${cv.projects.length} projetos; ideal <= 3 para 1 pagina.`);
+  if (experienceBullets > 12)
+    warnings.push(`${experienceBullets} bullets de experiencia; ideal <= 12.`);
+  if (cv.projects.length > 3)
+    warnings.push(`${cv.projects.length} projetos; ideal <= 3 para 1 pagina.`);
   for (const project of cv.projects) {
     if (project.stack.length > 8) {
       warnings.push(`Stack de ${project.ref} tem ${project.stack.length} itens; o ideal e ate 8.`);
@@ -242,11 +247,17 @@ export function validateCv(
   }
 
   const coverage = bank
-    ? analyzeCoverage(jobText, [allText, ...cv.skills.flatMap((g) => [g.group, ...g.items]),
-        ...cv.education.flatMap((item) => [item.course, item.institution, item.detail ?? '']),
-        ...cv.certifications.flatMap((item) => [item.name, item.detail ?? '']),
-        ...cv.languages,
-      ].join('\n'), bank)
+    ? analyzeCoverage(
+        jobText,
+        [
+          allText,
+          ...cv.skills.flatMap((g) => [g.group, ...g.items]),
+          ...cv.education.flatMap((item) => [item.course, item.institution, item.detail ?? '']),
+          ...cv.certifications.flatMap((item) => [item.name, item.detail ?? '']),
+          ...cv.languages,
+        ].join('\n'),
+        bank,
+      )
     : null;
   if (coverage && coverage.score < 60) {
     warnings.push(

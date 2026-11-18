@@ -111,7 +111,10 @@ export function renderMarkdown(cv: TailoredCv, profile: Profile): string {
     lines.push('');
   }
 
-  return `${lines.join('\n').replace(/\n{3,}/g, '\n\n').trim()}\n`;
+  return `${lines
+    .join('\n')
+    .replace(/\n{3,}/g, '\n\n')
+    .trim()}\n`;
 }
 
 export function renderHtml(cv: TailoredCv, profile: Profile, template: string): string {
@@ -129,7 +132,9 @@ export function renderHtml(cv: TailoredCv, profile: Profile, template: string): 
   }
   parts.push('</header>');
 
-  parts.push(`<section><h2>${labels.summary}</h2><p>${escapeHtml(cv.summary.trim())}</p></section>`);
+  parts.push(
+    `<section><h2>${labels.summary}</h2><p>${escapeHtml(cv.summary.trim())}</p></section>`,
+  );
 
   if (cv.skills.length > 0) {
     parts.push(`<section><h2>${labels.skills}</h2><ul class="skills">`);
@@ -150,7 +155,8 @@ export function renderHtml(cv: TailoredCv, profile: Profile, template: string): 
         parts.push(`<span class="stack">${escapeHtml(project.stack.join(' · '))}</span>`);
       }
       parts.push('<ul>');
-      for (const bullet of project.bullets) parts.push(`<li>${escapeHtml(bullet.text.trim())}</li>`);
+      for (const bullet of project.bullets)
+        parts.push(`<li>${escapeHtml(bullet.text.trim())}</li>`);
       parts.push('</ul>');
       if (project.link) parts.push(`<p class="link">${escapeHtml(project.link)}</p>`);
       parts.push('</div>');

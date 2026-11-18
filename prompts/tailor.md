@@ -60,11 +60,11 @@ O PDF tem que caber em 1 página. Respeite estes limites (o validador mede as p�
 
 ```yaml
 meta:
-  company: "Nome da empresa"
-  role: "Título exato da vaga"
-  lang: pt            # pt ou en
-  headline: "Desenvolvedor Full Stack Júnior"   # usar uma das variantes do perfil
-  match_score: 78     # 0-100, sua estimativa honesta
+  company: 'Nome da empresa'
+  role: 'Título exato da vaga'
+  lang: pt # pt ou en
+  headline: 'Desenvolvedor Full Stack Júnior' # usar uma das variantes do perfil
+  match_score: 78 # 0-100, sua estimativa honesta
 summary: |
   Resumo de 3 a 5 linhas, espelhando o vocabulário da vaga. Mesma estrutura do resumo do perfil, com foco no que esta vaga pede.
 skills:
@@ -72,36 +72,37 @@ skills:
     items: [JavaScript, TypeScript, SQL]
 projects:
   - ref: laudo-format
-    name: "Laudo Format — Padronização de Laudos Veterinários"
+    name: 'Laudo Format — Padronização de Laudos Veterinários'
     stack: [Next.js, TypeScript, React]
-    link: "https://github.com/LuizClaudioAds/laudo-format"
+    link: 'https://github.com/LuizClaudioAds/laudo-format'
     bullets:
       - ref: laudo-1
-        text: "Desenvolvi..."
+        text: 'Desenvolvi...'
 experience:
   - ref: life-lab
-    role: "Patologista Clínico Veterinário"
-    company: "Life Lab"
-    context: "rotina laboratorial + automação de processos"
-    period: "2025 – Presente"
+    role: 'Patologista Clínico Veterinário'
+    company: 'Life Lab'
+    context: 'rotina laboratorial + automação de processos'
+    period: '2025 – Presente'
     bullets:
       - ref: ll-5
-        text: "Reduzi..."
+        text: 'Reduzi...'
 education:
   - ref: ads-estacio
-    course: "Tecnólogo em Análise e Desenvolvimento de Sistemas (ADS)"
-    institution: "Universidade Estácio de Sá"
-    detail: "cursando — previsão Jan/2028"
+    course: 'Tecnólogo em Análise e Desenvolvimento de Sistemas (ADS)'
+    institution: 'Universidade Estácio de Sá'
+    detail: 'cursando — previsão Jan/2028'
 certifications:
   - ref: cert-react-node
-    name: "React + Node.js"
-    detail: "Rocketseat · 60h"
+    name: 'React + Node.js'
+    detail: 'Rocketseat · 60h'
 languages:
-  - "Português (Nativo)"
-  - "Inglês (Intermediário — leitura técnica avançada)"
+  - 'Português (Nativo)'
+  - 'Inglês (Intermediário — leitura técnica avançada)'
 ```
 
 Regras do schema:
+
 - `ref` de projeto/experiência/formação/certificação deve ser o `id` do perfil.
 - `ref` de bullet deve ser um bullet daquele mesmo item do perfil.
 - Máximo: 3 projetos, 4 experiências, 4 bullets por experiência, 4 por projeto, 8 grupos de skills, 4 bullets por experiência.
@@ -118,19 +119,24 @@ Regras do schema:
 **Recomendação:** candidatar-se | candidatar-se com ajustes | repensar
 
 ## O que a vaga pede
+
 - Requisito — obrigatório/desejável — evidência no perfil (bullet id) — status ✅/⚠️/❌
 
 ## Gaps (o que falta e como compensar)
+
 - Gap — impacto — sugestão (estudar, projeto, resposta na entrevista)
 
 ## Keywords da vaga
+
 - Presentes no CV: ...
 - Ausentes: ...
 
 ## Riscos e pontos de atenção
+
 - (ex.: cargo atual não é dev; recrutador pode questionar transição)
 
 ## Sugestão de próxima ação
+
 - 1 a 3 itens objetivos (ex.: criar projeto com Docker; destacar X na entrevista)
 ```
 

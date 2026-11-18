@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 import { Command } from 'commander';
 import { importCv } from './commands/import-cv.js';
+import { inbox } from './commands/inbox.js';
 import { checkJob, exportCommand, listJobs, previewJob } from './commands/jobs.js';
 import { keywordsCommand } from './commands/keywords.js';
 import { profileShow, profileValidate } from './commands/profile.js';
@@ -33,11 +34,21 @@ program
   .option('--model <modelo>', 'modelo do OpenCode (provider/modelo)')
   .option('--cover', 'gera tambem cover-letter.md', false)
   .option('--dry-run', 'monta job.md e prompt.md sem chamar a IA', false)
-  .action(async (vaga: string, options: { lang?: string; model?: string; cover: boolean; dryRun: boolean }) => {
-    const lang = options.lang === 'en' || options.lang === 'pt' ? options.lang : undefined;
-    if (options.lang && !lang) throw new Error('--lang aceita apenas "pt" ou "en".');
-    await tailor(vaga, { lang, model: options.model, cover: options.cover, dryRun: options.dryRun });
-  });
+  .action(
+    async (
+      vaga: string,
+      options: { lang?: string; model?: string; cover: boolean; dryRun: boolean },
+    ) => {
+      const lang = options.lang === 'en' || options.lang === 'pt' ? options.lang : undefined;
+      if (options.lang && !lang) throw new Error('--lang aceita apenas "pt" ou "en".');
+      await tailor(vaga, {
+        lang,
+        model: options.model,
+        cover: options.cover,
+        dryRun: options.dryRun,
+      });
+    },
+  );
 
 program
   .command('fix')
@@ -45,6 +56,41 @@ program
   .argument('<slug>', 'pasta em jobs/')
   .option('--model <modelo>', 'modelo do OpenCode')
   .action((slug: string, options: { model?: string }) => fixJob(slug, options));
+
+program
+  .command('inbox')
+  .description('Processa todas as vagas de uma pasta (padrao: vagas/)')
+  .option('--dir <pasta>', 'pasta com as vagas em .md/.txt', 'vagas')
+  .option('--lang <idioma>', 'pt ou en')
+  .option('--model <modelo>', 'modelo do OpenCode')
+  .option('--cover', 'gera tambem cover-letter.md', false)
+  .option('--limit <n>', 'processa no maximo N vagas')
+  .option('--retry-failed', 'tenta de novo as que falharam', false)
+  .action(
+    async (options: {
+      dir: string;
+      lang?: string;
+      model?: string;
+      cover: boolean;
+      limit?: string;
+      retryFailed: boolean;
+    }) => {
+      const lang = options.lang === 'en' || options.lang === 'pt' ? options.lang : undefined;
+      if (options.lang && !lang) throw new Error('--lang aceita apenas "pt" ou "en".');
+      const limit = options.limit ? Number(options.limit) : undefined;
+      if (options.limit && (!Number.isFinite(limit) || (limit ?? 0) < 1)) {
+        throw new Error('--limit precisa ser um numero positivo.');
+      }
+      await inbox({
+        dir: options.dir,
+        lang,
+        model: options.model,
+        cover: options.cover,
+        limit,
+        retryFailed: options.retryFailed,
+      });
+    },
+  );
 
 program
   .command('export')
@@ -88,7 +134,10 @@ profile
 profile
   .command('show')
   .description('Mostra o curriculo base como texto')
-  .option('--section <secao>', 'identidade | resumo | skills | projetos | experiencia | formacao | certificacoes')
+  .option(
+    '--section <secao>',
+    'identidade | resumo | skills | projetos | experiencia | formacao | certificacoes',
+  )
   .action(profileShow);
 
 program.parseAsync(process.argv).catch((error: unknown) => {

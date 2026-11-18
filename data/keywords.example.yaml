@@ -62,7 +62,7 @@ aprendendo:
 
 pendente:
   - term: Linux
-    pergunta: "Linux no dia a dia ou apenas estudo?"
+    pergunta: 'Linux no dia a dia ou apenas estudo?'
 
 soft:
   - term: Melhoria contínua

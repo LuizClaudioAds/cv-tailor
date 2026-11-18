@@ -153,7 +153,10 @@ describe('validador anti-alucinacao', () => {
       stack: ['React'],
       link: 'https://exemplo.com',
       bullets: [
-        { ref: 'lp-1', text: 'Desenvolvi landing pages e sites institucionais com React e Next.js.' },
+        {
+          ref: 'lp-1',
+          text: 'Desenvolvi landing pages e sites institucionais com React e Next.js.',
+        },
       ],
     });
     expect(errors(cv)).toContain('landing-pages');

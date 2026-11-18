@@ -15,7 +15,9 @@ export async function profileValidate(options: { file?: string } = {}): Promise<
   console.log(`  bullets....: ${totalBullets}`);
   console.log(`  projetos...: ${profile.projects.length}`);
   console.log(`  empresas...: ${profile.experience.length}`);
-  console.log(`  skills.....: ${profile.skills.reduce((sum, group) => sum + group.items.length, 0)}`);
+  console.log(
+    `  skills.....: ${profile.skills.reduce((sum, group) => sum + group.items.length, 0)}`,
+  );
   console.log(`  formacao...: ${profile.education.length}`);
 }
 

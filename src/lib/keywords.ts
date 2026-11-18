@@ -63,7 +63,10 @@ export function variants(keyword: Keyword): string[] {
 export function hasKeyword(text: string, keyword: Keyword): boolean {
   const haystack = searchable(text);
   return variants(keyword).some((variant) => {
-    const pattern = new RegExp(`(?<![a-z0-9])${escapeRegExp(searchable(variant))}(?![a-z0-9])`, 'i');
+    const pattern = new RegExp(
+      `(?<![a-z0-9])${escapeRegExp(searchable(variant))}(?![a-z0-9])`,
+      'i',
+    );
     return pattern.test(haystack);
   });
 }
@@ -112,7 +115,9 @@ export function analyzeCoverage(jobText: string, cvText: string, bank: KeywordBa
 
 /** Extrai termos que a vaga pede mas o banco nao conhece (para enriquecer o banco). */
 export function unknownTerms(jobText: string, bank: KeywordBank, candidates: string[]): string[] {
-  const known = TIERS.flatMap((tier) => bank[tier]).flatMap(variants).map(searchable);
+  const known = TIERS.flatMap((tier) => bank[tier])
+    .flatMap(variants)
+    .map(searchable);
   return candidates.filter((candidate) => {
     const needle = searchable(candidate);
     if (needle.length < 2) return false;

@@ -17,6 +17,9 @@ data/base/*
 jobs/*/
 !jobs/.gitkeep
 
+# Caixa de entrada de vagas
+vagas/
+
 # Saidas locais
 *.tsbuildinfo
 preview.png

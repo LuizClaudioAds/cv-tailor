@@ -36,7 +36,9 @@ export async function runCvAgent(options: AgentRunOptions): Promise<void> {
 
     const timer = setTimeout(() => {
       child.kill();
-      reject(new Error(`O agente excedeu ${Math.round(timeoutMs / 60000)} minutos e foi encerrado.`));
+      reject(
+        new Error(`O agente excedeu ${Math.round(timeoutMs / 60000)} minutos e foi encerrado.`),
+      );
     }, timeoutMs);
 
     child.on('error', (error) => {

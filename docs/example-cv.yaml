@@ -22,11 +22,11 @@ skills:
     items: [Node.js, APIs REST]
   - group: Qualidade e DevOps
     items:
-      - "Testes automatizados (Vitest, Playwright)"
-      - "CI/CD (GitHub Actions)"
+      - 'Testes automatizados (Vitest, Playwright)'
+      - 'CI/CD (GitHub Actions)'
       - Git, GitHub
   - group: Em aprendizado
-    items: [Docker, "Cloud (AWS)"]
+    items: [Docker, 'Cloud (AWS)']
 
 projects:
   - ref: painel-interno
@@ -60,7 +60,7 @@ experience:
     role: Analista Operacional
     company: Acme Tecnologia
     context: rotina operacional + automação de processos
-    period: "2022 – Presente"
+    period: '2022 – Presente'
     bullets:
       - ref: exp-3
         text: >-
@@ -78,7 +78,7 @@ experience:
   - ref: freelance
     role: Desenvolvedora Web
     company: Autônomo
-    period: "2021 – Presente"
+    period: '2021 – Presente'
     bullets:
       - ref: free-2
         text: >-

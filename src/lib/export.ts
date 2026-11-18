@@ -30,7 +30,10 @@ export async function readCvYaml(filePath: string): Promise<TailoredCv> {
   try {
     data = YAML.parse(raw);
   } catch (error) {
-    throw new Error(`YAML invalido em ${filePath}: ${error instanceof Error ? error.message : error}`);
+    throw new Error(
+      `YAML invalido em ${filePath}: ${error instanceof Error ? error.message : error}`,
+      { cause: error },
+    );
   }
 
   const parsed = cvSchema.safeParse(data);
@@ -43,7 +46,10 @@ export async function readCvYaml(filePath: string): Promise<TailoredCv> {
   return parsed.data;
 }
 
-export async function exportJob(jobDir: string, options: ExportOptions = {}): Promise<ExportResult> {
+export async function exportJob(
+  jobDir: string,
+  options: ExportOptions = {},
+): Promise<ExportResult> {
   const profile = await loadProfile();
   const index = indexProfile(profile);
   if (index.duplicateBulletIds.length > 0) {

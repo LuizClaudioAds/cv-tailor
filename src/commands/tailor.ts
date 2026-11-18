@@ -5,7 +5,16 @@ import { loadPreferences } from '../lib/preferences.js';
 import { loadProfile } from '../lib/profile.js';
 import { slugify } from '../lib/text.js';
 
-const PT_STOPWORDS = [' para ', ' com ', ' voc', ' n', ' experi', ' desenvol', ' trabalho', ' anos '];
+const PT_STOPWORDS = [
+  ' para ',
+  ' com ',
+  ' voc',
+  ' n',
+  ' experi',
+  ' desenvol',
+  ' trabalho',
+  ' anos ',
+];
 const EN_STOPWORDS = [' the ', ' and ', ' with ', ' experience', ' develop', ' years ', ' you '];
 
 export function detectLanguage(text: string): 'pt' | 'en' {
@@ -123,7 +132,14 @@ export async function tailor(jobInput: string, options: TailorOptions): Promise<
   return { jobDir: finalDir, slug: finalSlug };
 }
 
-export function printReport(report: { errors: string[]; warnings: string[]; coverage: { score: number; missing: string[] } | null }, jobDir: string): void {
+export function printReport(
+  report: {
+    errors: string[];
+    warnings: string[];
+    coverage: { score: number; missing: string[] } | null;
+  },
+  jobDir: string,
+): void {
   if (report.coverage) {
     console.log(`Cobertura de keywords da vaga: ${report.coverage.score}%`);
     if (report.coverage.missing.length > 0) {
@@ -148,17 +164,17 @@ export async function fixJob(slug: string, options: { model?: string }): Promise
 
   const profile = await loadProfile();
   const bank = await loadKeywords();
-  const jobText = await fs
-    .readFile(path.join(jobDir, 'job.md'), 'utf8')
-    .catch(() => {
-      throw new Error(`job.md nao encontrado em jobs/${slug}.`);
-    });
+  const jobText = await fs.readFile(path.join(jobDir, 'job.md'), 'utf8').catch(() => {
+    throw new Error(`job.md nao encontrado em jobs/${slug}.`);
+  });
 
   const cv = await readCvYaml(path.join(jobDir, 'cv.yaml'));
   const report = validateCv(cv, profile, jobText, bank);
 
   const prefs = await loadPreferences();
-  const existingPdf = (await fs.readdir(jobDir).catch(() => [])).find((file) => file.endsWith('.pdf'));
+  const existingPdf = (await fs.readdir(jobDir).catch(() => [])).find((file) =>
+    file.endsWith('.pdf'),
+  );
   if (existingPdf) {
     const { countPdfPages } = await import('../lib/pdf.js');
     const pages = await countPdfPages(path.join(jobDir, existingPdf));
@@ -188,7 +204,9 @@ export async function fixJob(slug: string, options: { model?: string }): Promise
   });
   await fs.writeFile(promptFile, prompt, 'utf8');
 
-  console.log(`Corrigindo ${slug} (${report.errors.length} erros, ${report.warnings.length} avisos)...`);
+  console.log(
+    `Corrigindo ${slug} (${report.errors.length} erros, ${report.warnings.length} avisos)...`,
+  );
   await runCvAgent({
     promptPath: path.relative(paths.root, promptFile),
     cwd: paths.root,

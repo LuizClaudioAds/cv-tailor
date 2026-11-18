@@ -57,8 +57,8 @@ skills:
   - group: Qualidade e DevOps
     group_en: Quality and DevOps
     items:
-      - "Testes automatizados (Vitest, Playwright)"
-      - "CI/CD (GitHub Actions)"
+      - 'Testes automatizados (Vitest, Playwright)'
+      - 'CI/CD (GitHub Actions)'
       - Git
       - GitHub
       - Vercel
@@ -182,10 +182,10 @@ languages:
 
 # Números que podem aparecer no CV. Qualquer número fora daqui é bloqueado pelo validador.
 facts:
-  - "~2h -> ~40 min (~65% menos tempo)"
-  - "equipe de 8 pessoas"
-  - "3 certificações"
+  - '~2h -> ~40 min (~65% menos tempo)'
+  - 'equipe de 8 pessoas'
+  - '3 certificações'
 
 # Pendências: o agente não usa enquanto estiverem aqui.
 pending:
-  - "Confirmar pretensão salarial em preferences.yaml"
+  - 'Confirmar pretensão salarial em preferences.yaml'

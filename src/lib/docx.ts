@@ -24,26 +24,22 @@ const LABELS = {
   },
 } as const;
 
-export async function writeDocx(cv: TailoredCv, profile: Profile, outputPath: string): Promise<void> {
-  const {
-    AlignmentType,
-    BorderStyle,
-    Document,
-    HeadingLevel,
-    Packer,
-    Paragraph,
-    TextRun,
-  } = await import('docx');
+export async function writeDocx(
+  cv: TailoredCv,
+  profile: Profile,
+  outputPath: string,
+): Promise<void> {
+  const { AlignmentType, BorderStyle, Document, HeadingLevel, Packer, Paragraph, TextRun } =
+    await import('docx');
 
   const labels = LABELS[cv.meta.lang];
   const { identity } = profile;
 
-  const sectionTitle = (text: string) =>    new Paragraph({
+  const sectionTitle = (text: string) =>
+    new Paragraph({
       spacing: { before: 220, after: 90 },
       border: { bottom: { color: '1F3B57', style: BorderStyle.SINGLE, size: 6, space: 1 } },
-      children: [
-        new TextRun({ text, bold: true, size: 21, color: '1F3B57', allCaps: false }),
-      ],
+      children: [new TextRun({ text, bold: true, size: 21, color: '1F3B57', allCaps: false })],
     });
 
   const bullet = (text: string) =>
@@ -128,7 +124,12 @@ export async function writeDocx(cv: TailoredCv, profile: Profile, outputPath: st
           new Paragraph({
             spacing: { after: 40 },
             children: [
-              new TextRun({ text: project.stack.join(' | '), italics: true, size: 18, color: '444444' }),
+              new TextRun({
+                text: project.stack.join(' | '),
+                italics: true,
+                size: 18,
+                color: '444444',
+              }),
             ],
           }),
         );

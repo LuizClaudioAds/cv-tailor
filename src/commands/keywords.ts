@@ -16,7 +16,9 @@ export async function keywordsCommand(options: { job?: string }): Promise<void> 
   if (!options.job) {
     printBank(bank);
     console.log('');
-    console.log('Use "cvtailor keywords --job <arquivo|url>" para ver o que a vaga pede e o que falta no perfil.');
+    console.log(
+      'Use "cvtailor keywords --job <arquivo|url>" para ver o que a vaga pede e o que falta no perfil.',
+    );
     return;
   }
 
@@ -70,7 +72,11 @@ function profileCorpus(profile: Awaited<ReturnType<typeof loadProfile>>): string
     profile.summary.en ?? '',
     profile.development.practice_pt ?? '',
     ...profile.skills.flatMap((group) => group.items),
-    ...profile.projects.flatMap((project) => [project.name, ...project.stack, ...project.bullets.map((b) => b.text)]),
+    ...profile.projects.flatMap((project) => [
+      project.name,
+      ...project.stack,
+      ...project.bullets.map((b) => b.text),
+    ]),
     ...profile.experience.flatMap((item) => [item.role, ...item.bullets.map((b) => b.text)]),
     ...profile.certifications.map((cert) => cert.name),
   ].join('\n');

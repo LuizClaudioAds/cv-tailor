@@ -17,7 +17,7 @@ PDF/DOCX plus a match analysis — with a validator that blocks fabricated exper
 
 ![Exemplo de currículo gerado](docs/preview.png)
 
-*Currículo de exemplo gerado a partir de dados fictícios (`data/profile.example.yaml`).*
+_Currículo de exemplo gerado a partir de dados fictícios (`data/profile.example.yaml`)._
 
 ---
 
@@ -93,19 +93,20 @@ Curriculo: jobs/acme-desenvolvedor-front-end-junior
 
 ## Comandos
 
-| Comando | O que faz |
-|---|---|
-| `import-cv <arquivo>` | Extrai o texto de um CV `.docx`/`.pdf` para `data/base/cv.txt` |
-| `profile validate [--file]` | Valida o schema do perfil e a unicidade dos ids |
-| `profile show [--section]` | Mostra o perfil como texto, com os ids de cada bullet |
-| `keywords [--job <vaga>]` | Lista o banco ATS ou compara a vaga com o perfil (o que falta) |
-| `tailor <vaga>` | Pipeline completo: análise + CV + PDF/DOCX |
-| `tailor --dry-run` | Monta `job.md` + `prompt.md` sem chamar a IA (auditoria) |
-| `fix <slug>` | Reenvia o CV reprovado ao agente com o relatório do validador |
-| `check <slug>` | Revalida fatos, keywords e número de páginas |
-| `export <slug>` | Re-renderiza PDF/DOCX/MD a partir do `cv.yaml` |
-| `preview <slug>` | Gera `preview.png` para revisar o layout |
-| `list` | Lista candidaturas com score de match |
+| Comando                     | O que faz                                                                   |
+| --------------------------- | --------------------------------------------------------------------------- |
+| `import-cv <arquivo>`       | Extrai o texto de um CV `.docx`/`.pdf` para `data/base/cv.txt`              |
+| `profile validate [--file]` | Valida o schema do perfil e a unicidade dos ids                             |
+| `profile show [--section]`  | Mostra o perfil como texto, com os ids de cada bullet                       |
+| `keywords [--job <vaga>]`   | Lista o banco ATS ou compara a vaga com o perfil (o que falta)              |
+| `tailor <vaga>`             | Pipeline completo: análise + CV + PDF/DOCX                                  |
+| `tailor --dry-run`          | Monta `job.md` + `prompt.md` sem chamar a IA (auditoria)                    |
+| `fix <slug>`                | Reenvia o CV reprovado ao agente com o relatório do validador               |
+| `inbox [--dir vagas]`       | Processa todas as vagas `.md`/`.txt` de uma pasta, sem repetir as já feitas |
+| `check <slug>`              | Revalida fatos, keywords e número de páginas                                |
+| `export <slug>`             | Re-renderiza PDF/DOCX/MD a partir do `cv.yaml`                              |
+| `preview <slug>`            | Gera `preview.png` para revisar o layout                                    |
+| `list`                      | Lista candidaturas com score de match                                       |
 
 Flags úteis do `tailor`: `--lang pt|en`, `--cover` (carta de apresentação), `--model provider/modelo`,
 `--dry-run`.
@@ -131,14 +132,17 @@ jobs/acme-desenvolvedor-front-end-junior/
 **Recomendação:** candidatar-se com ajustes
 
 ## O que a vaga pede
+
 - React — obrigatório — proj-1, exp-2 — ✅
 - Testes (Jest ou Vitest) — desejável — proj-2 (Vitest) — ⚠️ Jest ausente
 - Scrum — desejável — sem evidência — ❌
 
 ## Gaps
+
 - Scrum — impacto: cerimônias citadas — sugestão: estudar e citar vivência em Kanban
 
 ## Riscos
+
 - Cargo atual não é dev: posicionamento com projetos no topo e métrica de impacto
 ```
 
@@ -165,13 +169,13 @@ Cada bullet tem um `id`. O CV gerado referencia esses ids — é isso que torna 
 
 `data/keywords.yaml` organiza as palavras-chave em níveis, para nunca haver exagero:
 
-| Nível | Regra |
-|---|---|
-| `core` | você tem de verdade — entra em qualquer vaga da área |
-| `fortes` | você tem, mas só entra se a vaga citar |
+| Nível        | Regra                                                        |
+| ------------ | ------------------------------------------------------------ |
+| `core`       | você tem de verdade — entra em qualquer vaga da área         |
+| `fortes`     | você tem, mas só entra se a vaga citar                       |
 | `aprendendo` | aparece apenas no grupo "Em aprendizado", nunca como domínio |
-| `pendente` | falta confirmar — o agente não usa |
-| `soft` | exige `evidence` (id de bullet) para poder entrar |
+| `pendente`   | falta confirmar — o agente não usa                           |
+| `soft`       | exige `evidence` (id de bullet) para poder entrar            |
 
 `aliases` resolvem variações (`Node.js` / `NodeJS`), e o match respeita limite de palavra —
 `Java` não casa dentro de `JavaScript`.
@@ -222,21 +226,70 @@ Cobrem o núcleo do projeto:
 
 O CI roda typecheck, testes, build e valida o perfil de exemplo a cada push.
 
+## Desenvolvimento
+
+```bash
+npm run lint          # ESLint (flat config + typescript-eslint)
+npm run format        # Prettier --write
+npm run format:check  # o que o CI usa
+npm run typecheck
+npm test
+npm run build
+```
+
+Hooks: `npm install` já aponta o Git para `.githooks/`. O `pre-commit` **bloqueia** commit de
+`data/profile.yaml`, `preferences.yaml`, `keywords.yaml`, `data/base/`, `jobs/`, `vagas/`, `.env`
+e arquivos `.pdf`/`.docx` — uma segunda camada além do `.gitignore`.
+
 ## Configuração
 
-| Arquivo | Papel |
-|---|---|
-| `data/profile.yaml` | fatos do candidato (**não versionado**) |
-| `data/preferences.yaml` | pretensão, disponibilidade, idioma padrão, máx. de páginas, tom, modelo |
-| `data/keywords.yaml` | banco ATS por níveis |
-| `prompts/tailor.md` | regras de escrita e schema do `cv.yaml` |
-| `.opencode/agents/cv-tailor.md` | agente headless (escrita restrita a `jobs/**`) |
+| Arquivo                         | Papel                                                                   |
+| ------------------------------- | ----------------------------------------------------------------------- |
+| `data/profile.yaml`             | fatos do candidato (**não versionado**)                                 |
+| `data/preferences.yaml`         | pretensão, disponibilidade, idioma padrão, máx. de páginas, tom, modelo |
+| `data/keywords.yaml`            | banco ATS por níveis                                                    |
+| `prompts/tailor.md`             | regras de escrita e schema do `cv.yaml`                                 |
+| `.opencode/agents/cv-tailor.md` | agente headless (escrita restrita a `jobs/**`)                          |
 
-Modelo de IA: usa o modelo padrão da sessão do OpenCode. Para fixar, em `preferences.yaml`:
+## Inbox: várias vagas de uma vez
+
+Crie a pasta `vagas/` (ignorada pelo Git) e salve cada descrição como `.md` ou `.txt`:
+
+```
+vagas/
+├── acme-frontend-junior.md
+├── globex-estagio-backend.txt
+└── initech-fullstack.md
+```
+
+```bash
+npm run cv -- inbox                 # processa o que ainda não foi feito
+npm run cv -- inbox --limit 3       # no máximo 3 por execução
+npm run cv -- inbox --retry-failed  # tenta de novo as que deram erro
+npm run cv -- inbox --cover --lang en
+```
+
+O progresso fica em `vagas/.processadas.json` (hash do conteúdo). Se você editar o arquivo da vaga,
+o hash muda e ela é processada de novo. Vagas com erro ficam registradas e não repetem automaticamente.
+
+## Modelo de IA
+
+O **agente** é sempre o `cv-tailor` (definido em `.opencode/agents/cv-tailor.md`) — a CLI não muda isso.
+O **modelo** é resolvido nesta ordem:
+
+1. `--model provider/modelo` na linha de comando;
+2. `model:` em `data/preferences.yaml`;
+3. o modelo padrão configurado no OpenCode.
+
+Importante: `opencode run` **não** herda o modelo selecionado na sessão do TUI. Se você está no chat com
+outro modelo, a CLI continua usando o padrão do OpenCode — a menos que você defina um dos dois acima.
 
 ```yaml
+# data/preferences.yaml
 model: anthropic/claude-sonnet-5-5#high
 ```
+
+Por execução: `--model provider/modelo`.
 
 ## Limitações (honestas)
 
