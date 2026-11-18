@@ -6,6 +6,7 @@ import { htmlToPdf } from './pdf.js';
 import { loadProfile, indexProfile, type Profile } from './profile.js';
 import { loadTemplate, renderHtml, renderMarkdown } from './render.js';
 import { slugify } from './text.js';
+import { repairCvYaml } from './yaml-repair.js';
 
 export interface ExportOptions {
   pdf?: boolean;
@@ -36,7 +37,7 @@ export async function readCvYaml(filePath: string): Promise<TailoredCv> {
     );
   }
 
-  const parsed = cvSchema.safeParse(data);
+  const parsed = cvSchema.safeParse(repairCvYaml(data));
   if (!parsed.success) {
     const issues = parsed.error.issues
       .map((issue) => `  - ${issue.path.join('.') || '(raiz)'}: ${issue.message}`)

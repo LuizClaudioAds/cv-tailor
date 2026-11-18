@@ -109,6 +109,8 @@ Regras do schema:
 - `bullets` pode ter menos itens que o original — selecione os mais relevantes para a vaga.
 - `link`: use o `repo` (ou `demo`) do projeto no perfil, se existir. Nunca invente URL nem aponte para o perfil do GitHub.
 - `stack`: no máximo 8 tecnologias por projeto, priorizando as que a vaga cita.
+- **YAML:** quando um item tiver vírgula dentro de parênteses (ex.: `Testes (Vitest, Playwright)`),
+  use **lista em bloco** (um `-` por linha). Em lista inline (`[a, b]`) a vírgula quebra o item.
 
 ## Formato de `analysis.md`
 

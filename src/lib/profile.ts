@@ -1,6 +1,7 @@
 import fs from 'node:fs/promises';
 import { z } from 'zod';
 import { paths } from './paths.js';
+import { repairProfileYaml } from './yaml-repair.js';
 import { normalize } from './text.js';
 
 const yearish = z.union([z.string(), z.number()]).transform((value) => String(value));
@@ -132,7 +133,7 @@ export async function loadProfile(filePath: string = paths.profile): Promise<Pro
     );
   });
   const { default: YAML } = await import('yaml');
-  const parsed = profileSchema.safeParse(YAML.parse(raw));
+  const parsed = profileSchema.safeParse(repairProfileYaml(YAML.parse(raw)));
   if (!parsed.success) {
     const issues = parsed.error.issues
       .map((issue) => `  - ${issue.path.join('.') || '(raiz)'}: ${issue.message}`)
