@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="{{LANG}}">
+  <head>
+    <meta charset="utf-8" />
+    <title>{{TITLE}}</title>
+    <style>
+      @page {
+        size: A4;
+        margin: 11mm 12mm;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 9.5pt;
+        line-height: 1.28;
+        color: #111;
+      }
+      header {
+        margin-bottom: 10px;
+      }
+      h1 {
+        font-size: 17pt;
+        letter-spacing: 0.3px;
+        margin: 0 0 2px;
+        text-transform: uppercase;
+      }
+      .headline {
+        font-size: 11pt;
+        font-weight: bold;
+        color: #1f3b57;
+        margin: 0 0 4px;
+      }
+      .contact,
+      .links {
+        font-size: 9.2pt;
+        color: #333;
+        margin: 0;
+      }
+      section {
+        margin-top: 7px;
+      }
+      h2 {
+        font-size: 10.5pt;
+        text-transform: uppercase;
+        letter-spacing: 0.6px;
+        border-bottom: 1px solid #1f3b57;
+        padding-bottom: 2px;
+        margin: 0 0 5px;
+      }
+      p {
+        margin: 0 0 4px;
+      }
+      ul {
+        margin: 0;
+        padding-left: 16px;
+      }
+      li {`n        margin-bottom: 2px;
+      }
+      .skills li {
+        margin-bottom: 2px;
+      }
+      .item {
+        margin-bottom: 5px;
+        page-break-inside: avoid;
+      }
+      .item-head {
+        display: block;
+        margin-bottom: 2px;
+      }
+      .item-head strong {
+        font-size: 10.6pt;
+      }
+      .meta {
+        font-size: 9.4pt;
+        color: #444;
+      }
+      .stack {
+        display: block;
+        font-size: 9.2pt;
+        color: #444;
+        margin-bottom: 2px;
+      }
+      .link {
+        font-size: 9pt;
+        color: #1f3b57;
+        margin-top: 2px;
+        word-break: break-all;
+      }
+      .keep-together {
+        page-break-inside: avoid;
+      }
+    </style>
+  </head>
+  <body>
+    {{CONTENT}}
+  </body>
+</html>

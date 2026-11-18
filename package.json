@@ -1,0 +1,34 @@
+{
+  "name": "cv-tailor",
+  "version": "0.1.0",
+  "private": true,
+  "license": "MIT",
+  "description": "Adapta um curriculo base para cada vaga: analise de match, validacao anti-alucinacao e exportacao ATS-friendly (PDF/DOCX).",
+  "type": "module",
+  "bin": {
+    "cvtailor": "./dist/cli.js"
+  },
+  "scripts": {
+    "cv": "tsx src/cli.ts",
+    "dev": "tsx src/cli.ts",
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "dependencies": {
+    "commander": "^15.1.0",
+    "docx": "^9.15.4",
+    "mammoth": "^1.13.0",
+    "pdfjs-dist": "^6.5.438",
+    "playwright-core": "^1.65.1",
+    "yaml": "^2.9.1",
+    "zod": "^4.6.7"
+  },
+  "devDependencies": {
+    "@types/node": "^24.10.1",
+    "tsx": "^4.20.6",
+    "typescript": "^5.9.3"
+  }
+}

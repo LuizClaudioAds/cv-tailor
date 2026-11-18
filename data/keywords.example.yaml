@@ -1,0 +1,82 @@
+# Banco de keywords ATS de exemplo.
+#
+# core       -> você tem de verdade: prioridade máxima em qualquer vaga da área
+# fortes     -> tem, mas só entra se a vaga citar (evita CV inflado)
+# aprendendo -> aparece apenas como "em aprendizado", nunca como domínio
+# pendente   -> falta confirmar; o agente não usa
+# soft       -> só entra com evidência real no CV (campo evidence)
+#
+# aliases servem para reconhecer a mesma keyword escrita de outro jeito na vaga.
+
+core:
+  - term: JavaScript
+    aliases: [JS, ECMAScript]
+  - term: TypeScript
+    aliases: [TS]
+  - term: React
+    aliases: [React.js, ReactJS]
+  - term: Node.js
+    aliases: [NodeJS, Node]
+  - term: SQL
+  - term: Git
+  - term: GitHub
+  - term: HTML
+  - term: CSS
+  - term: APIs REST
+    aliases: [REST API, REST APIs, API REST, RESTful]
+  - term: Next.js
+    aliases: [NextJS, Next]
+
+fortes:
+  - term: Tailwind CSS
+    aliases: [Tailwind, TailwindCSS]
+  - term: PostgreSQL
+    aliases: [Postgres]
+  - term: Testes automatizados
+    aliases: [testes unitários, testes de integração, automated tests, unit tests]
+  - term: Vitest
+  - term: Playwright
+  - term: Jest
+  - term: CI/CD
+    aliases: [integração contínua, entrega contínua, continuous integration]
+  - term: GitHub Actions
+  - term: Vercel
+  - term: Deploy
+    aliases: [deploy contínuo, deploy automático]
+  - term: Metodologias Ágeis
+    aliases: [Scrum, Kanban, agile, cerimônias ágeis]
+  - term: UX/UI
+    aliases: [UX, UI, usabilidade, experiência do usuário, user experience]
+  - term: Orientação a Objetos
+    aliases: [POO, OOP]
+  - term: Estrutura de Dados
+    aliases: [data structures]
+  - term: SEO
+
+aprendendo:
+  - term: Docker
+  - term: Cloud
+    aliases: [computação em nuvem]
+  - term: AWS
+    aliases: [Amazon Web Services]
+
+pendente:
+  - term: Linux
+    pergunta: "Linux no dia a dia ou apenas estudo?"
+
+soft:
+  - term: Melhoria contínua
+    aliases: [continuous improvement, kaizen, melhoria de processos]
+    evidence: exp-4
+  - term: Aprendizado contínuo
+    aliases: [continuous learning, aprendizado constante]
+    evidence: development.practice_pt
+  - term: Resolução de problemas
+    aliases: [problem solving]
+    evidence: exp-4
+  - term: Comunicação
+    aliases: [communication]
+    evidence: exp-1
+  - term: Trabalho em equipe
+    aliases: [teamwork, colaboração, collaboration]
+    evidence: free-3

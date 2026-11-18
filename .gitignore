@@ -1,0 +1,25 @@
+# Dependencias
+node_modules/
+dist/
+
+# Variaveis de ambiente
+.env
+.env.*
+!.env.example
+
+# Dados pessoais (nunca versionar)
+data/profile.yaml
+data/preferences.yaml
+data/base/*
+!data/base/.gitkeep
+
+# Candidaturas geradas: contem dados pessoais e da vaga
+jobs/*/
+!jobs/.gitkeep
+
+# Saidas locais
+*.tsbuildinfo
+preview.png
+.DS_Store
+Thumbs.db
+data/keywords.yaml

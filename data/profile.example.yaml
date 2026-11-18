@@ -1,0 +1,186 @@
+# Perfil de exemplo — use como molde para data/profile.yaml
+# Regra de ouro: nada entra no CV gerado se não estiver aqui.
+# Cada bullet tem um id; o agente só pode reescrever bullets que apontam para um id existente.
+
+identity:
+  name: Maria Souza
+  headline: Desenvolvedora Front-end Júnior
+  headline_en: Junior Front-end Developer
+  headline_variants:
+    - Desenvolvedora Front-end Júnior
+    - Desenvolvedora Full Stack Júnior
+    - Estagiária em Desenvolvimento de Software
+  headline_variants_en:
+    - Junior Front-end Developer
+    - Junior Full Stack Developer
+    - Software Development Intern
+  location: São Paulo – SP, Brasil
+  email: maria.souza@example.com
+  phone: (11) 90000-0000
+  links:
+    linkedin: https://www.linkedin.com/in/exemplo/
+    github: https://github.com/exemplo
+
+summary:
+  pt: |
+    Desenvolvedora Front-end em início de carreira, com experiência em produção construindo interfaces
+    em React, TypeScript e Next.js. Reduzi de ~2 horas para ~40 minutos uma rotina operacional diária
+    (~65% menos tempo) automatizando a digitação de relatórios internos. Trabalho com APIs REST, testes
+    automatizados, CI no GitHub Actions e deploy contínuo, com foco em usabilidade.
+  en: |
+    Early-career Front-end Developer with production experience building interfaces in React, TypeScript
+    and Next.js. Cut a daily operational routine from ~2 hours to ~40 minutes (~65% less time) by
+    automating internal report typing. Works with REST APIs, automated tests, CI on GitHub Actions and
+    continuous deployment, with a focus on usability.
+
+development:
+  practice_pt: >-
+    Aprendizado contínuo: 3 certificações concluídas e estudo ativo de Docker, testes automatizados
+    e cloud.
+  practice_en: >-
+    Continuous learning: 3 completed certifications and ongoing study of Docker, automated testing
+    and cloud.
+
+skills:
+  - group: Linguagens
+    group_en: Languages
+    items: [JavaScript, TypeScript, SQL]
+  - group: Frontend
+    group_en: Frontend
+    items: [React, Next.js, HTML, CSS, Tailwind CSS]
+  - group: Backend
+    group_en: Backend
+    items: [Node.js, APIs REST]
+  - group: Banco de Dados
+    group_en: Databases
+    items: [PostgreSQL]
+  - group: Qualidade e DevOps
+    group_en: Quality and DevOps
+    items: [Testes automatizados (Vitest, Playwright), CI/CD (GitHub Actions), Git, GitHub, Vercel]
+  - group: Em aprendizado
+    group_en: Currently learning
+    items: [Docker, Cloud (AWS)]
+
+projects:
+  - id: painel-interno
+    name: Painel Interno de Relatórios
+    name_en: Internal Reports Dashboard
+    stack: [Next.js, TypeScript, React, Tailwind CSS, Vitest, GitHub Actions, Vercel]
+    role: Desenvolvedora
+    role_en: Developer
+    repo: https://github.com/exemplo/painel-interno
+    demo: https://painel-interno.example.com
+    bullets:
+      - id: proj-1
+        text: >-
+          Desenvolvi uma aplicação web em Next.js, TypeScript e Tailwind para padronizar relatórios
+          internos, com regras configuráveis e exportação em HTML.
+      - id: proj-2
+        text: >-
+          Implantei testes automatizados com Vitest, lint e typecheck no CI do GitHub Actions, com
+          deploy contínuo na Vercel.
+      - id: proj-3
+        text: >-
+          Reduzi de ~2 horas para ~40 minutos a rotina diária de digitação de relatórios (~65% menos tempo).
+
+  - id: landing-pages
+    name: Landing Pages e Sites Institucionais
+    name_en: Landing Pages and Business Websites
+    stack: [React, Next.js, Tailwind CSS]
+    role: Desenvolvedora
+    role_en: Developer
+    bullets:
+      - id: lp-1
+        text: >-
+          Desenvolvi landing pages e sites institucionais com React e Next.js, priorizando SEO,
+          desempenho, responsividade e boas práticas de UX.
+
+experience:
+  - id: acme
+    company: Acme Tecnologia
+    role: Analista Operacional
+    role_en: Operations Analyst
+    role_context: rotina operacional + automação de processos
+    role_context_en: operations routine + process automation
+    period:
+      start: 2022
+      current: true
+    location: São Paulo – SP
+    bullets:
+      - id: exp-1
+        text: >-
+          Atuei na rotina operacional de uma equipe de 8 pessoas, validando dados e liberando
+          relatórios internos.
+      - id: exp-2
+        text: >-
+          Desenvolvi automações com JavaScript, React e Node.js para eliminar tarefas manuais
+          repetitivas do fluxo de relatórios.
+      - id: exp-3
+        text: >-
+          Reduzi de ~2 horas para ~40 minutos uma rotina diária, com menos erros de digitação e
+          menos retrabalho (~65% menos tempo).
+      - id: exp-4
+        text: >-
+          Identifiquei oportunidades de melhoria contínua nos processos e implementei soluções com
+          foco em usabilidade para os demais analistas.
+
+  - id: freelance
+    company: Autônomo
+    company_en: Freelance
+    role: Desenvolvedora Web
+    role_en: Web Developer
+    period:
+      start: 2021
+      current: true
+    bullets:
+      - id: free-1
+        text: Desenvolvi sites institucionais e landing pages, com foco em conversão e performance.
+      - id: free-2
+        text: >-
+          Implementei interfaces responsivas com foco em usabilidade, desempenho e boas práticas de
+          desenvolvimento web.
+      - id: free-3
+        text: Desenvolvimento e integração de aplicações web com consumo de APIs REST.
+
+education:
+  - id: ads-faculdade
+    course: Tecnólogo em Análise e Desenvolvimento de Sistemas (ADS)
+    course_en: Associate Degree in Systems Analysis and Development
+    institution: Faculdade Exemplo
+    status: cursando
+    status_en: in progress
+    expected_end: Dez/2027
+
+certifications:
+  - id: cert-react
+    name: React + Node.js
+    issuer: Escola Exemplo
+    hours: 60
+  - id: cert-git
+    name: Git e GitHub
+    issuer: Escola Exemplo
+    hours: 20
+  - id: cert-bd
+    name: Administração de Banco de Dados
+    issuer: Escola Exemplo
+    hours: 15
+
+languages:
+  - name: Português
+    name_en: Portuguese
+    level: Nativo
+    level_en: Native
+  - name: Inglês
+    name_en: English
+    level: Intermediário (leitura técnica)
+    level_en: Intermediate (technical reading)
+
+# Números que podem aparecer no CV. Qualquer número fora daqui é bloqueado pelo validador.
+facts:
+  - "~2h -> ~40 min (~65% menos tempo)"
+  - "equipe de 8 pessoas"
+  - "3 certificações"
+
+# Pendências: o agente não usa enquanto estiverem aqui.
+pending:
+  - "Confirmar pretensão salarial em preferences.yaml"

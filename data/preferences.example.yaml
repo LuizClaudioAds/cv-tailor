@@ -1,0 +1,53 @@
+# Preferências de candidatura — copie para data/preferences.yaml e ajuste.
+# Campos null são omitidos das respostas e das cartas.
+
+work_model:
+  - Remoto
+  - Híbrido
+
+locations:
+  - São Paulo – SP
+  - Remoto (Brasil)
+
+seniority:
+  - Estágio
+  - Júnior
+
+salary_expectation: null # ex.: "R$ 3.500"
+availability: null # ex.: "Imediata" ou "30 dias"
+relocation: false
+
+# Idioma de saída quando a vaga não deixar claro.
+default_language: pt
+
+# Limites de layout.
+max_pages: 1
+section_order:
+  - Resumo
+  - Competências
+  - Projetos
+  - Experiência Profissional
+  - Formação Acadêmica
+  - Certificações
+  - Idiomas
+
+tone: >
+  Direto, técnico e sem adjetivos vazios. Primeira pessoa implícita (bullets começam com verbo de ação).
+  Sem clichês, sem emojis.
+
+avoid:
+  - "apaixonado por tecnologia"
+  - "proativo e dinâmico"
+  - '"trabalho em equipe" como bullet isolado'
+  - emojis
+  - foto
+  - tabelas de duas colunas
+
+# Contexto que não cabe no CV mas ajuda a IA a posicionar o candidato.
+notes: >
+  Exemplo: transição de carreira de operações para desenvolvimento, após automatizar uma rotina
+  do próprio trabalho. Posicionar a experiência anterior como domínio de negócio e resolução de
+  problemas reais, não como experiência dev.
+
+# Modelo do OpenCode para as gerações. null = usa o modelo padrão da sessão.
+model: null
